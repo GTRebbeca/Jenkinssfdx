@@ -13,12 +13,6 @@ node {
 
 
 
-    println 'KEY IS' 
-    println JWT_KEY_CRED_ID
-    println HUB_ORG
-    println SFDC_HOST
-    println CONNECTED_APP_CONSUMER_KEY
-    def toolbelt = tool 'toolbelt'
 
     stage('checkout source') {
         // when running in multi-branch job, one must issue this command
@@ -47,5 +41,12 @@ node {
             println('Hello from a Job DSL script! ok')
             println(rmsg)
         }
+
+        stage('Export Code'){
+            emsg = sh returnStdout: true, script: 'sfdx force:data:tree:export -u org-with-data --query  "SELECT fields(all) FROM Account" --prefix export-demo --outputdir sfdx-out --plan'
+            printf emsg
+            println('EXPORT TEST')
+        }
+
     }
 }
