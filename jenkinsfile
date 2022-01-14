@@ -43,7 +43,7 @@ node {
         }
 
         stage('Export Code'){
-            emsg = sh returnStdout: true, script: 'sfdx force:data:tree:export -u org-with-data --query  "SELECT fields(all) FROM Account" --prefix export-demo --outputdir sfdx-out --plan'
+            emsg = sh returnStdout: true, script: 'sfdx force:data:tree:export -u org-with-data --query  "SELECT fields(all) FROM Account" --prefix export-demo --outputdir data-source --plan'
             printf emsg
             println('EXPORT TEST')
         }
