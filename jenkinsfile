@@ -11,14 +11,8 @@ node {
     def JWT_KEY_CRED_ID = env.JWT_CRED_ID_DH
     def CONNECTED_APP_CONSUMER_KEY=env.CONNECTED_APP_CONSUMER_KEY_DH
 
-    echo "${env.PATH}";
-    git branch: 'develop', credentialsId: 'xxxxx', url: 'git@xxx.com:org/repo.git'
-    echo "${env.GIT_BRANCH}";
-    echo "${env.GIT_URL}";
-    echo "${env.JAVA_HOME}";
-    echo "${env.NODE_NAME}";
-    echo "${env.JOB_NAME}";
-    
+    echo "${env.HUB_ORG_DH}";
+
     println 'KEY IS' 
     println JWT_KEY_CRED_ID
     println HUB_ORG
