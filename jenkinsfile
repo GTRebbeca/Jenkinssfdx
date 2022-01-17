@@ -31,7 +31,7 @@ node {
         stage('Deploye Code') {
 
 			// need to pull out assigned username
-			   rmsg = command "sfdx force:source:deploy -d manifest/. --targetusername UserTesr"
+			   rmsg = command 'sfdx force:mdapi:deploy -d manifest/. -u ${HUB_ORG}'
 			  
             printf rmsg
             println('Hello from a Job DSL script! ok')
