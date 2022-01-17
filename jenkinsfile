@@ -32,7 +32,6 @@ node {
 			// need to pull out assigned username
 			   rmsg = command "sfdx force:apex:test:run --targetusername HubOrg --resultformat human --codecoverage --testlevel ${TEST_LEVEL}"
 			  
-            printf rmsg
             println('Hello from a Job DSL script! ok')
             println(rmsg)
         }
@@ -40,7 +39,6 @@ node {
         stage('Export Code'){
 
             emsg = command "sfdx force:data:tree:export --query  \"SELECT fields(all) FROM Account\" --prefix export-demo --outputdir data-source --plan --targetdevhubusername HubOrg"
-            printf emsg
             println('EXPORT TEST')
         }
 
