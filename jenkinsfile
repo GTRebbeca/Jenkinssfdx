@@ -21,7 +21,7 @@ node {
 
     withCredentials([file(credentialsId: JWT_KEY_CRED_ID, variable: 'jwt_key_file')]) {
         stage('Auth Org') {
-            rc = command "sfdx force:auth:jwt:grant --clientid ${CONNECTED_APP_CONSUMER_KEY} --username ${HUB_ORG} --setalias UserTest --jwtkeyfile ${jwt_key_file} --instanceurl ${SFDC_HOST}"
+            rc = command "sfdx force:auth:jwt:grant --clientid ${CONNECTED_APP_CONSUMER_KEY} --username ${HUB_ORG} --setalias UserTesr --jwtkeyfile ${jwt_key_file} --instanceurl ${SFDC_HOST}"
 		    if (rc != 0) {
 			error 'Salesforce org authorization failed.'
 		    }
@@ -31,7 +31,7 @@ node {
         stage('Deploye Code') {
 
 			// need to pull out assigned username
-			   rmsg = command "sfdx force:mdapi:deploy -d manifest/. --username ${HUB_ORG}"
+			   rmsg = command "sfdx force:mdapi:deploy -d manifest/. --targetusername UserTesr"
 			  
             printf rmsg
             println('Hello from a Job DSL script! ok')
@@ -40,7 +40,7 @@ node {
 
         stage('Export Code'){
 
-            emsg = command "sfdx force:data:tree:export --username ${HUB_ORG} --query  \"SELECT fields(all) FROM Account\" --prefix export-demo --outputdir data-source --plan"
+            emsg = command "sfdx force:data:tree:export --targetusername UserTesr --query  \"SELECT fields(all) FROM Account\" --prefix export-demo --outputdir data-source --plan"
             printf emsg
             println('EXPORT TEST')
         }
