@@ -27,7 +27,7 @@ node {
 			println rc
         }
 
-        stage('Deploye Code') {
+        /*stage('Deploye Code') {
 
 			// need to pull out assigned username
 			   rmsg = command "sfdx force:apex:test:run --targetusername HubOrg --resultformat tap --codecoverage --testlevel ${TEST_LEVEL} --wait 10"
@@ -35,7 +35,7 @@ node {
             printf rmsg
             println('Hello from a Job DSL script! ok')
             println(rmsg)
-        }
+        }*/
 
         stage('Export Code'){
 
