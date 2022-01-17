@@ -39,14 +39,14 @@ node {
 
         stage('Install plugin'){
             emsg = command "sfdx plugins:install texei-sfdx-plugin";
-            emsg2 = command "y"
+            printf 'y'
 
         }
 
         stage('Export Objects data'){
 
             emsg = command "sfdx texei:data:export --objects Account,Contact --outputdir ./data-source"
-
+            printf 'y'
             println('EXPORT TEST')
             println(emsg)
         }
