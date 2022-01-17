@@ -20,14 +20,18 @@ node {
     }
 
     withCredentials([file(credentialsId: JWT_KEY_CRED_ID, variable: 'jwt_key_file')]) {
-        stage('Deploye Code') {
-            rc = bat returnStatus: true, script: 'sfdx force:auth:jwt:grant --clientid ${CONNECTED_APP_CONSUMER_KEY} --username ${HUB_ORG} --jwtkeyfile ${jwt_key_file} --setdefaultdevhubusername --instanceurl ${SFDC_HOST}'
-            if (rc != 0) { error 'hub org authorization failed' }
-
+        stage('Auth Org') {
+            rc = command "sfdx force:auth:jwt:grant --clientid ${CONNECTED_APP_CONSUMER_KEY} --username ${HUB_ORG} --setalias UserTest --jwtkeyfile \"${jwt_key_file}\" --setdefaultdevhubusername --instanceurl ${SFDC_HOST}"
+		    if (rc != 0) {
+			error 'Salesforce org authorization failed.'
+		    }
 			println rc
-			
+        }
+
+        stage('Deploye Code') {
+
 			// need to pull out assigned username
-			   rmsg = bat returnStdout: true, script: 'sfdx force:mdapi:deploy -d manifest/. -u ${HUB_ORG}'
+			   rmsg = command "sfdx force:mdapi:deploy -d manifest/. --targetusername UserTest"
 			  
             printf rmsg
             println('Hello from a Job DSL script! ok')
@@ -35,14 +39,18 @@ node {
         }
 
         stage('Export Code'){
-            rc = bat returnStatus: true, script: 'sfdx force:auth:jwt:grant --clientid ${CONNECTED_APP_CONSUMER_KEY} --username ${HUB_ORG} --jwtkeyfile ${jwt_key_file} --setdefaultdevhubusername --instanceurl ${SFDC_HOST}'
-            if (rc != 0) { error 'hub org authorization failed' }
 
-			println rc
-            emsg = bat returnStdout: true, script: 'sfdx force:data:tree:export -u ${HUB_ORG} --query  "SELECT fields(all) FROM Account" --prefix export-demo --outputdir data-source --plan'
+            emsg = command"sfdx force:data:tree:export --targetusername UserTest --query  \"SELECT fields(all) FROM Account\" --prefix export-demo --outputdir data-source --plan"
             printf emsg
             println('EXPORT TEST')
         }
 
+    }
+
+    def command(script) {
+    if (isUnix()) {
+        return sh(returnStatus: true, script: script);
+    } else {
+		return bat(returnStatus: true, script: script);
     }
 }
