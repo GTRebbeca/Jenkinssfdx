@@ -38,13 +38,14 @@ node {
         }
 
         stage('Install plugin'){
+            echo ""
             emsg = command "sfdx plugins:install texei-sfdx-plugin \ny";
 
         }
 
         stage('Export Objects data'){
 
-            emsg = command "sfdx texei:data:export --objects Account,Contact --outputdir ./data-source"
+            emsg = command "sfdx texei:data:export --objects Account,Contact --outputdir ./data-source >y"
             println('EXPORT TEST')
             println(emsg)
         }
