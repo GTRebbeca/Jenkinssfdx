@@ -31,7 +31,7 @@ node {
         stage('Deploye Code') {
 
 			// need to pull out assigned username
-			   rmsg = command "sfdx force:mdapi:deploy -d manifest/. --targetusername UserTest"
+			   rmsg = command "sfdx force:mdapi:deploy -d manifest/. --username ${HUB_ORG}"
 			  
             printf rmsg
             println('Hello from a Job DSL script! ok')
@@ -40,7 +40,7 @@ node {
 
         stage('Export Code'){
 
-            emsg = command "sfdx force:data:tree:export --targetusername UserTest --query  \"SELECT fields(all) FROM Account\" --prefix export-demo --outputdir data-source --plan"
+            emsg = command "sfdx force:data:tree:export --username ${HUB_ORG} --query  \"SELECT fields(all) FROM Account\" --prefix export-demo --outputdir data-source --plan"
             printf emsg
             println('EXPORT TEST')
         }
