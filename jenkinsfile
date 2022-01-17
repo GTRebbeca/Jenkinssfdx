@@ -38,8 +38,7 @@ node {
         }
 
         stage('Install plugin'){
-            emsg = command "sfdx plugins:install texei-sfdx-plugin 
-                    \n y";
+            emsg = command "sfdx plugins:install texei-sfdx-plugin \ny";
 
         }
 
