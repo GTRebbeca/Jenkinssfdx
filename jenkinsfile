@@ -46,7 +46,7 @@ node {
         stage('Export Objects data'){
 
             emsg = command "sfdx texei:data:export --objects Account,Contact --outputdir ./data-source"
-            printf 'y'
+            echo 'y'
             println('EXPORT TEST')
             println(emsg)
         }
