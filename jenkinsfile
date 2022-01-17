@@ -39,13 +39,13 @@ node {
 
         stage('Install plugin'){
             echo ""
-            emsg = command "sfdx plugins:install texei-sfdx-plugin \ny";
+            emsg = command "sfdx plugins:install texei-sfdx-plugin >y";
 
         }
 
         stage('Export Objects data'){
 
-            emsg = command "sfdx texei:data:export --objects Account,Contact --outputdir ./data-source >y"
+            emsg = command "sfdx texei:data:export --objects Account,Contact --outputdir ./data-source"
             println('EXPORT TEST')
             println(emsg)
         }
@@ -58,7 +58,7 @@ node {
             println rc2
              emsg = command "sfdx texei:data:import --inputdir ./data-source --targetusername ${USERNAME2}"*/
 
-            echo env.CONNECTED_APP_CONSUMER_KEY_DH_TWO
+            echo ${env.CONNECTED_APP_CONSUMER_KEY_DH_TWO}
             println('IMPORT TEST')
 
         }
