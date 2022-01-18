@@ -19,7 +19,7 @@ node {
         checkout scm
     }
     stage('build'){
-             bat "sfdx plugins:install texei-sfdx-plugin -y"
+             bat "echo 'y' | sfdx plugins:install texei-sfdx-plugin"
            
     }
 
