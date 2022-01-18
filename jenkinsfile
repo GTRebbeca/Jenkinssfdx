@@ -12,7 +12,7 @@ node {
     def CONNECTED_APP_CONSUMER_KEY_TWO=env.CONNECTED_APP_CONSUMER_KEY_DH_TWO
     def USERNAME2='rebbe@dev.com'
 
-    //def toolbelt = tool 'toolbelt'
+    def texei = tool 'texei'
 
     stage('checkout source') {
         // when running in multi-branch job, one must issue this command
@@ -37,14 +37,10 @@ node {
             println(rmsg)
         }
 
-        stage('Install plugin'){
+       /* stage('Install plugin'){
              bat "sfdx plugins:install texei-sfdx-plugin /y"
-             bat """
-                    sfdx plugins:install texei-sfdx-plugin
-                    y
-                """
            
-        }
+        }*/
 
         stage('Export Objects data'){
 
