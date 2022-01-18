@@ -11,6 +11,16 @@
       "orderBy": "",
       "externalId": "",
       "excludedFields": ["SetupOwnerId"]
+    },
+    {
+      "name": "Account",
+      "label": "Parent Account",
+      "filters": "ParentId = null"
+    },
+    {
+      "name": "Account",
+      "label": "Child Account",
+      "filters": "ParentId != null"
     }
   ]
 }
