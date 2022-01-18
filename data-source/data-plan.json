@@ -9,7 +9,7 @@
       "label": "",
       "filters": "",
       "orderBy": "",
-      "externalId": "",
+      "externalId": "NumberExt__c",
       "excludedFields": ["SetupOwnerId"]
     },
     {
