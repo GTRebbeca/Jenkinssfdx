@@ -58,7 +58,7 @@ node {
             println rc2
              emsg = command "sfdx texei:data:import --inputdir ./data-source --targetusername ${USERNAME2}"*/
 
-            echo ${env.CONNECTED_APP_CONSUMER_KEY_DH_TWO}
+            echo env.CONNECTED_APP_CONSUMER_KEY_DH_TWO
             println('IMPORT TEST')
 
         }
