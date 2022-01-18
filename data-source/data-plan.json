@@ -1,0 +1,16 @@
+{
+  "excludedFields": [
+    
+  ],
+  "lookupOverride": {},
+  "sObjects": [
+    {
+      "name": "testcs__c",
+      "label": "",
+      "filters": "",
+      "orderBy": "",
+      "externalId": "",
+      "excludedFields": ["SetupOwnerId"]
+    }
+  ]
+}
