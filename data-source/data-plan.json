@@ -1,6 +1,9 @@
 {
   "excludedFields": [
-    
+    "LastModifiedDate",
+    "CreatedById",
+    "CreatedDate",
+    "LastModifiedById"
   ],
   "lookupOverride": {},
   "sObjects": [
