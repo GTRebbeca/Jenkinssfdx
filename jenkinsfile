@@ -38,7 +38,8 @@ node {
         }
 
         stage('Install plugin'){
-             emsg = bat "sfdx plugins:install texei-sfdx-plugin \n y"
+             emsg = bat (script: 'sfdx plugins:install texei-sfdx-plugin', returnStdout: true)
+             println(emsg)
         }
 
         stage('Export Objects data'){
