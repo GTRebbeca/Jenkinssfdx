@@ -18,6 +18,10 @@ node {
         // when running in multi-branch job, one must issue this command
         checkout scm
     }
+    stage('build'){
+             bat "sfdx plugins:install texei-sfdx-plugin -y"
+           
+    }
 
     withCredentials([file(credentialsId: JWT_KEY_CRED_ID, variable: 'jwt_key_file')]) {
         stage('Auth Org') {
@@ -37,10 +41,6 @@ node {
             println(rmsg)
         }
 
-       stage('Install plugin'){
-             bat echo "sfdx plugins:install texei-sfdx-plugin" + "y"
-           
-        }
 
         stage('Export Objects data'){
 
