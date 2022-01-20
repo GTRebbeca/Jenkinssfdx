@@ -19,13 +19,13 @@
       "name": "Account",
       "label": "Parent Account",
       "filters": "ParentId = null",
-      "externalId": "Name"
+      "externalId": ""
     },
     {
       "name": "Account",
       "label": "Child Account",
       "filters": "ParentId != null",
-      "externalId": "Name"
+      "externalId": ""
     }
   ]
 }
