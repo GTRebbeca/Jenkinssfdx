@@ -16,7 +16,7 @@ node {
 
 withEnv(["HOME=${env.WORKSPACE}"]) {
         
-    withCredentials([file(credentialsId: SERVER_KEY_CREDENTALS_ID, variable: 'server_key_file')]) {
+    withCredentials([file(credentialsId: JWT_KEY_CRED_ID, variable: 'jwt_key_file')]) {
         stage('Auth Org') {
 
         rc = command "sfdx force:auth:jwt:grant --instanceurl ${SFDC_HOST} --clientid ${CONNECTED_APP_CONSUMER_KEY} --username ${HUB_ORG_DH} --jwtkeyfile ${jwt_key_file} --setdefaultdevhubusername --setalias HubOrg"
