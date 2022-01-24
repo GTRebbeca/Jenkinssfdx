@@ -1,36 +1,31 @@
 #!groovy
 import groovy.json.JsonSlurperClassic
-pipeline {
+node {
 
 
+    def SFDC_USERNAME = env.HUB_ORG_DH
+    def TEST_LEVEL='RunLocalTests'
+    def HUB_ORG=env.HUB_ORG_DH
+    def SFDC_HOST = env.SFDC_HOST_DH
+    def JWT_KEY_CRED_ID = env.JWT_CRED_ID_DH
+    def CONNECTED_APP_CONSUMER_KEY=env.CONNECTED_APP_CONSUMER_KEY_DH
+    def CONNECTED_APP_CONSUMER_KEY_TWO=env.CONNECTED_APP_CONSUMER_KEY_DH_TWO
+    def USERNAME2='rebbe@dev.com'
 
     //def texei = tool 'texei'
-    environment {
-        
-        SFDC_USERNAME = "${env.HUB_ORG_DH}"
-        TEST_LEVEL="RunLocalTests"
-        HUB_ORG= "${env.HUB_ORG_DH}"
-        SFDC_HOST = "${env.SFDC_HOST_DH}"
-        JWT_KEY_CRED_ID = "${env.JWT_CRED_ID_DH}"
-        CONNECTED_APP_CONSUMER_KEY="${env.CONNECTED_APP_CONSUMER_KEY_DH}"
-        CONNECTED_APP_CONSUMER_KEY_TWO="${env.CONNECTED_APP_CONSUMER_KEY_DH_TWO}"
-        USERNAME2="rebbe@dev.com"
-        jwt_key_file = credentials('JWT_KEY_CRED_ID') // Secret value is 'sec%ret'
+
+    stage('checkout source') {
+        // when running in multi-branch job, one must issue this command
+        checkout scm
     }
-    stages {
-        stage('checkout source') {
-            // when running in multi-branch job, one must issue this command
-            checkout scm
-        }
+
 
         stage('Auth Org') {
-
-        rc = command "sfdx auth:jwt:grant --instanceurl ${SFDC_HOST} --clientid ${CONNECTED_APP_CONSUMER_KEY} --username ${HUB_ORG_DH} --jwtkeyfile ${jwt_key_file} --setdefaultdevhubusername --setalias HubOrg"
+        rc = command "sfdx auth:jwt:grant --instanceurl ${SFDC_HOST} --clientid ${CONNECTED_APP_CONSUMER_KEY} --username ${HUB_ORG_DH} --jwtkeyfile ${JWT_KEY_CRED_ID} --setdefaultdevhubusername --setalias HubOrg"
                 if (rc != 0) {
                     error 'Salesforce dev hub org authorization failed.'
                 }
-            println rc
-
+			println rc
         }
 
         stage('Run Test Code') {
@@ -60,8 +55,8 @@ pipeline {
             println('IMPORT TEST')
 
         }
-*/
-    }
+    */
+    
    
 }
 
