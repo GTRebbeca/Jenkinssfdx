@@ -19,7 +19,7 @@ node {
         checkout scm
     }
 
-withCredentials([file(credentialsId: 'JWT_CRED_ID_DH', variable: 'jwt_key_file')]) {
+withCredentials([file(credentialsId: 'JWT_KEY_CRED_ID', variable: 'jwt_key_file')]) {
         stage('Auth Org') {
 
         rc = command "sfdx force:auth:jwt:grant --instanceurl ${SFDC_HOST} --clientid ${CONNECTED_APP_CONSUMER_KEY} --username ${HUB_ORG_DH} --jwtkeyfile ${jwt_key_file} --setdefaultdevhubusername --setalias HubOrg"
