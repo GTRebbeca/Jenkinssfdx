@@ -12,7 +12,7 @@ node {
     def CONNECTED_APP_CONSUMER_KEY_TWO=env.CONNECTED_APP_CONSUMER_KEY_DH_TWO
     def USERNAME2='rebbe@dev.com'
 
-    def texei = tool 'texei'
+    //def texei = tool 'texei'
 
     stage('checkout source') {
         // when running in multi-branch job, one must issue this command
@@ -38,7 +38,7 @@ node {
         }
 
 
-        stage('Export Objects data'){
+     /*   stage('Export Objects data'){
 
             emsg = command "sfdx texei:data:export --dataplan ./data-source/data-plan.json --outputdir ./data-source --targetusername HubOrg"
             println('EXPORT TEST')
@@ -56,7 +56,7 @@ node {
 
         }
 
-    }
+    }*/
    
 }
 
