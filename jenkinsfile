@@ -3,17 +3,18 @@ import groovy.json.JsonSlurperClassic
 pipeline {
 
 
-    def SFDC_USERNAME = env.HUB_ORG_DH
-    def TEST_LEVEL='RunLocalTests'
-    def HUB_ORG=env.HUB_ORG_DH
-    def SFDC_HOST = env.SFDC_HOST_DH
-    def JWT_KEY_CRED_ID = env.JWT_CRED_ID_DH
-    def CONNECTED_APP_CONSUMER_KEY=env.CONNECTED_APP_CONSUMER_KEY_DH
-    def CONNECTED_APP_CONSUMER_KEY_TWO=env.CONNECTED_APP_CONSUMER_KEY_DH_TWO
-    def USERNAME2='rebbe@dev.com'
 
     //def texei = tool 'texei'
     environment {
+        
+        SFDC_USERNAME = env.HUB_ORG_DH
+        TEST_LEVEL='RunLocalTests'
+        HUB_ORG=env.HUB_ORG_DH
+        SFDC_HOST = env.SFDC_HOST_DH
+        JWT_KEY_CRED_ID = env.JWT_CRED_ID_DH
+        CONNECTED_APP_CONSUMER_KEY=env.CONNECTED_APP_CONSUMER_KEY_DH
+        CONNECTED_APP_CONSUMER_KEY_TWO=env.CONNECTED_APP_CONSUMER_KEY_DH_TWO
+        USERNAME2='rebbe@dev.com'
         jwt_key_file = credentials('JWT_KEY_CRED_ID') // Secret value is 'sec%ret'
     }
     stages {
