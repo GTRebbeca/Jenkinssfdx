@@ -1,6 +1,6 @@
 #!groovy
 import groovy.json.JsonSlurperClassic
-node {
+pipeline {
 
 
     def SFDC_USERNAME = env.HUB_ORG_DH
@@ -13,21 +13,23 @@ node {
     def USERNAME2='rebbe@dev.com'
 
     //def texei = tool 'texei'
-  environment {
-    EXAMPLE_KEY = credentials('example-credentials-id') // Secret value is 'sec%ret'
-  }
-  stages {
+    environment {
+        jwt_key_file = credentials('JWT_KEY_CRED_ID') // Secret value is 'sec%ret'
+    }
+    stages {
         stage('checkout source') {
             // when running in multi-branch job, one must issue this command
             checkout scm
         }
 
         stage('Auth Org') {
-        rc = command "sfdx auth:jwt:grant --instanceurl ${SFDC_HOST} --clientid ${CONNECTED_APP_CONSUMER_KEY} --username ${HUB_ORG_DH} --jwtkeyfile ${JWT_KEY_CRED_ID} --setdefaultdevhubusername --setalias HubOrg"
+
+        rc = command "sfdx auth:jwt:grant --instanceurl ${SFDC_HOST} --clientid ${CONNECTED_APP_CONSUMER_KEY} --username ${HUB_ORG_DH} --jwtkeyfile ${jwt_key_file} --setdefaultdevhubusername --setalias HubOrg"
                 if (rc != 0) {
                     error 'Salesforce dev hub org authorization failed.'
                 }
             println rc
+
         }
 
         stage('Run Test Code') {
@@ -58,8 +60,8 @@ node {
 
         }
 */
-    
-  }
+    }
+   
 }
 
     def command(script) {
