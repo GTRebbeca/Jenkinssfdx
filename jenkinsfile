@@ -21,12 +21,13 @@ node {
 
 
         stage('Auth Org') {
-        rc1 = command "sfdx force:auth:logout --username ${HUB_ORG_DH}"    
-        rc = command "sfdx force:auth:jwt:grant --instanceurl ${SFDC_HOST} --clientid ${CONNECTED_APP_CONSUMER_KEY} --username ${HUB_ORG_DH} --jwtkeyfile ${JWT_KEY_CRED_ID} --setdefaultdevhubusername --setalias HubOrg"
+         withCredentials([file(credentialsId: 'JWT_KEY_CRED_ID', variable: 'jwt_key_file')]) {   
+        rc = command "sfdx force:auth:jwt:grant --instanceurl ${SFDC_HOST} --clientid ${CONNECTED_APP_CONSUMER_KEY} --username ${HUB_ORG_DH} --jwtkeyfile ${jwt_key_file} --setdefaultdevhubusername --setalias HubOrg"
                 if (rc != 0) {
                     error 'Salesforce dev hub org authorization failed.'
                 }
 			println rc
+        }
         }
 
         stage('Run Test Code') {
