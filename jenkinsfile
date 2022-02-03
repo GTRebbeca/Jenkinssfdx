@@ -19,7 +19,7 @@ withEnv(["HOME=${env.WORKSPACE}"]) {
     withCredentials([file(credentialsId: JWT_KEY_CRED_ID, variable: 'jwt_key_file')]) {
         stage('Auth Org') {
 
-        rc = command "sfdx force:auth:jwt:grant --instanceurl ${SFDC_HOST} --clientid ${CONNECTED_APP_CONSUMER_KEY} --username ${HUB_ORG_DH} --jwtkeyfile ${jwt_key_file} --setdefaultdevhubusername --setalias HubOrg"
+        rc = command "sfdx force:auth:jwt:grant --instanceurl ${SFDC_HOST} --clientid ${CONNECTED_APP_CONSUMER_KEY_R} --username ${HUB_ORG_DH_R} --jwtkeyfile ${jwt_key_file} --setdefaultdevhubusername --setalias HubOrg"
                 if (rc != 0) {
                     error 'Salesforce dev hub org authorization failed.'
                 }
@@ -45,7 +45,7 @@ withEnv(["HOME=${env.WORKSPACE}"]) {
         }
 
         stage('Import Objects Data into other org'){
-            rc2 = command "sfdx auth:jwt:grant --instanceurl ${SFDC_HOST} --clientid ${CONNECTED_APP_CONSUMER_KEY_TWO} --username ${USERNAME2} --jwtkeyfile ${jwt_key_file} --setalias OrgDevRebbe"
+            rc2 = command "sfdx auth:jwt:grant --instanceurl ${SFDC_HOST} --clientid ${CONNECTED_APP_CONSUMER_KEY_TWO_R} --username ${USERNAME2} --jwtkeyfile ${jwt_key_file} --setalias OrgDevRebbe"
                     if (rc2 != 0) {
                         error 'Salesforce dev hub org authorization failed.'
                     }
