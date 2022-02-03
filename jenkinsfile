@@ -3,13 +3,13 @@ import groovy.json.JsonSlurperClassic
 node {
 
 
-    def SFDC_USERNAME = env.HUB_ORG_DH
+    def SFDC_USERNAME = env.HUB_ORG_DH_R
     def TEST_LEVEL='RunLocalTests'
-    def HUB_ORG=env.HUB_ORG_DH
+    def HUB_ORG=env.HUB_ORG_DH_R
     def SFDC_HOST = env.SFDC_HOST_DH
-    def JWT_KEY_CRED_ID = env.JWT_CRED_ID_DH
-    def CONNECTED_APP_CONSUMER_KEY=env.CONNECTED_APP_CONSUMER_KEY_DH
-    def CONNECTED_APP_CONSUMER_KEY_TWO=env.CONNECTED_APP_CONSUMER_KEY_DH_TWO
+    def JWT_KEY_CRED_ID = env.JWT_CRED_ID_DH_R
+    def CONNECTED_APP_CONSUMER_KEY=env.CONNECTED_APP_CONSUMER_KEY_DH_R
+    def CONNECTED_APP_CONSUMER_KEY_TWO=env.CONNECTED_APP_CONSUMER_KEY_DH_TWO_R
     def USERNAME2='rebbe@dev.com'
 
     //def texei = tool 'texei'
@@ -37,7 +37,7 @@ withEnv(["HOME=${env.WORKSPACE}"]) {
         }
 
 
-     /*   stage('Export Objects data'){
+        stage('Export Objects data'){
 
             emsg = command "sfdx texei:data:export --dataplan ./data-source/data-plan.json --outputdir ./data-source --targetusername HubOrg"
             println('EXPORT TEST')
@@ -54,7 +54,7 @@ withEnv(["HOME=${env.WORKSPACE}"]) {
             println('IMPORT TEST')
 
         }
-    */
+    
     }
 }
    
